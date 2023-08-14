@@ -1,0 +1,43 @@
+/* style.css */
+
+/* Create a grid container */
+.subjects-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+  grid-gap: 5px; /* Gap between grid items */
+}
+
+/* Apply styling to each subject */
+.subject {
+  border: 5px solid #120101;
+  padding: 10px;
+}
+
+/* Additional styles (optional) */
+body {
+  font-family: Arial, sans-serif;
+  margin: 5px;
+}
+
+h1 {
+  text-align: center;
+}
+
+button {
+  margin-top: 10px;
+}
+/* Centering the .centered-box both horizontally and vertically */
+.centered-box {
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-90%, -50%);
+}
+
+/* Styling the .container */
+.container {
+  text-align: center; /* Center the button and content horizontally */
+  padding: 20px;
+  border: 2px solid #ccc;
+  background-color: #f0f0f0;
+}
