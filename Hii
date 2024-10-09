@@ -1,0 +1,57 @@
+using Microsoft.Maui.Controls;
+
+public static class MauiProgram
+{
+    public static MauiApp CreateMauiApp()
+    {
+        var builder = MauiApp.CreateBuilder();
+        builder.UseMauiApp<App>();
+
+        // Disable focus visuals on Windows platform only for keyboard (Tab navigation)
+        Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping("DisableTabFocusVisuals", (handler, view) =>
+        {
+            #if WINDOWS
+            if (handler.PlatformView is Microsoft.UI.Xaml.Controls.ComboBox nativePicker)
+            {
+                // Disable the focus visuals for keyboard (Tab) navigation but allow interaction
+                nativePicker.UseSystemFocusVisuals = false;
+                nativePicker.FocusVisualPrimaryThickness = new Microsoft.UI.Xaml.Thickness(0); // Removes the black border when focused via Tab
+            }
+            #endif
+        });
+
+        return builder.Build();
+    }
+}
+
+// MainPage.xaml.cs (Code-behind)
+public partial class MainPage : ContentPage
+{
+    public MainPage()
+    {
+        InitializeComponent();
+
+        // Create four Pickers with some test data
+        var picker1 = new Picker { Title = "Picker 1" };
+        var picker2 = new Picker { Title = "Picker 2" };
+        var picker3 = new Picker { Title = "Picker 3" };
+        var picker4 = new Picker { Title = "Picker 4" };
+
+        // Add test items to each Picker
+        var items = new List<string> { "Option 1", "Option 2", "Option 3" };
+        picker1.ItemsSource = items;
+        picker2.ItemsSource = items;
+        picker3.ItemsSource = items;
+        picker4.ItemsSource = items;
+
+        // Arrange Pickers in a vertical stack
+        var stackLayout = new StackLayout
+        {
+            Padding = new Thickness(20),
+            Children = { picker1, picker2, picker3, picker4 }
+        };
+
+        // Set the stack layout as the page's content
+        Content = stackLayout;
+    }
+}
